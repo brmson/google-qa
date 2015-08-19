@@ -50,7 +50,7 @@ if __name__ == "__main__":
         else:
             print('  %s' % (json.dumps(d, sort_keys=True),), file=output)
 
-        sleep(1)
+        sleep(2)
         question_counter = question_counter+1
 
     print(']', file=output)
