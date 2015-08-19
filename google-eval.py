@@ -27,15 +27,18 @@ def main():
     question_counter = 0
     result_list = []
     json_result_list = []
-    print("question\tanswer")
+    print("question\t\tanswer")
     while question_counter < number_of_questions:
         questionText = parsed_data[question_counter]["qText"]
         questionAnswers = parsed_data[question_counter]["answers"]
         ID = parsed_data[question_counter]["qId"]
         result = subprocess.check_output(["./google-query.sh", questionText]).rstrip()
         print(questionText+"\t"+result)
+        if (result == "no answer found"):
+            result = None
         d = {}
-        d['qText'] = questionText
+        d['qId'] = ID
+        d['query'] = questionText
         d['answer'] = result
         result_list.append(d)
         sleep(1)
