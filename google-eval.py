@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+from __future__ import print_function
+
 import sys
 import subprocess
 from time import sleep
@@ -29,6 +31,7 @@ if __name__ == "__main__":
     question_counter = 0
     result_list = []
     print("question\t\tanswer")
+    print('[', file=output)
     while question_counter < number_of_questions:
         questionText = parsed_data[question_counter]["qText"]
         questionAnswers = parsed_data[question_counter]["answers"]
@@ -41,11 +44,15 @@ if __name__ == "__main__":
         d['qId'] = ID
         d['query'] = questionText
         d['answer'] = result
-        result_list.append(d)
+
+        if question_counter < number_of_questions-1:
+            print('  %s,' % (json.dumps(d, sort_keys=True),), file=output)
+        else:
+            print('  %s' % (json.dumps(d, sort_keys=True),), file=output)
+
         sleep(1)
         question_counter = question_counter+1
 
-    json_result_list = json.dumps(result_list)
-    output.write(json_result_list)
+    print(']', file=output)
     output.close()
     json_data.close()
