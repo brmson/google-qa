@@ -3,12 +3,12 @@
 import sys
 import subprocess
 from time import sleep
-import random
 import json
+
 
 def byteify(input):
     if isinstance(input, dict):
-        return {byteify(key):byteify(value) for key,value in input.iteritems()}
+        return {byteify(key):byteify(value) for key, value in input.iteritems()}
     elif isinstance(input, list):
         return [byteify(element) for element in input]
     elif isinstance(input, unicode):
@@ -16,17 +16,18 @@ def byteify(input):
     else:
         return input
 
-def main():
+if __name__ == "__main__":
     argv = sys.argv
     input_filename = argv[1]
     output_filename = argv[2]
+
     json_data = open(input_filename)
-    output = open(output_filename,"w")
+    output = open(output_filename, "w")
     parsed_data = byteify(json.load(json_data))
     number_of_questions = len(parsed_data)
+
     question_counter = 0
     result_list = []
-    json_result_list = []
     print("question\t\tanswer")
     while question_counter < number_of_questions:
         questionText = parsed_data[question_counter]["qText"]
@@ -48,7 +49,3 @@ def main():
     output.write(json_result_list)
     output.close()
     json_data.close()
-    return
-
-if __name__ == "__main__":
-    main()
