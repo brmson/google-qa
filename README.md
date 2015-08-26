@@ -15,4 +15,4 @@ google_query can by used by itself, by calling query or queryAndDump (which also
 	import google_query as q
 	q.query("Who directed fight club?")
 
-It is also extensible, you can add html attributes to increase the amount of found answers.
+It is also extensible, you can add html attributes to the lists and increase the amount of found answers.
