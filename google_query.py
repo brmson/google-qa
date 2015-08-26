@@ -18,7 +18,7 @@ class MyHTMLParser(HTMLParser):
                     self.recording = True
         if tag == 'div':
             for name, value in attrs:
-                if name == 'class' and value in ["kltat", "_Mjf", "_eF"]:
+                if name == 'class' and value in ["kltat", "_Mjf", "_eF","_yXc"]:
                     self.nested_recording = True
     def handle_endtag(self, tag):
         if tag == 'span':

@@ -53,7 +53,7 @@ if __name__ == "__main__":
             print('  %s' % (json.dumps(d, sort_keys=True),), file=output)
         sleep(2)
         question_counter = question_counter+1
-    print ("answered " + str(answered) + "questions from" + str(number_of_questions))
+    print ("answered " + str(answered) + " questions from " + str(number_of_questions))
     print(']', file=output)
     output.close()
     json_data.close()
