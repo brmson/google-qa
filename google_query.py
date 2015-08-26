@@ -10,8 +10,12 @@ class MyHTMLParser(HTMLParser):
         HTMLParser.__init__(self)
         self.recording = False
         self.nested_recording = False
+        self.found_bold = False
         self.result = []
     def handle_starttag(self, tag, attrs):
+        if self.recording == True and tag == 'b':
+            self.found_bold = True
+            self.result.append('b')
         if tag == 'span':
             for name, value in attrs:           #extracted using blood, sweat and tears
                 if name == 'class' and value in ["_Tgc", "_Tfc", "_m3b", "_Oke", "_Xbe", "_Nbe"]:
@@ -31,7 +35,14 @@ class MyHTMLParser(HTMLParser):
             self.result.append(data)
         if self.nested_recording == True:
             self.result.append(data)
-            self.result.append(' ')
+
+#we append 'b' to the list whenever we find a html bold tag, so now we parse it
+def parseBoldStrings(result):
+    result_list = []
+    for x in range (0, len(result)):
+            if result[x] == 'b':
+                result_list.append(result[x+1])
+    return result_list
 
 def query(question):
     reload(sys)
@@ -49,10 +60,10 @@ def query(question):
     contents.decode("utf-8", "replace") 
     parser = MyHTMLParser()
     parser.feed(contents)
-    if len(parser.result) == 0:
-        return "answer not found"
+    if parser.found_bold == True:
+        return parseBoldStrings(parser.result)
     else:
-        return (''.join(parser.result)).rstrip()
+        return parser.result
 
 #the same as query, but dumps the website to a file for analysis
 def queryAndDump(question):
@@ -73,10 +84,10 @@ def queryAndDump(question):
     contents.decode("utf-8", "replace") 
     parser = MyHTMLParser()
     parser.feed(contents)
-    if len(parser.result) == 0:
-        return "answer not found"
+    if parser.found_bold == True:
+        return parseBoldStrings(parser.result)
     else:
-        return (''.join(parser.result)).rstrip()
+        return parser.result
 
 
 def loadFromFile(filename):
@@ -85,7 +96,7 @@ def loadFromFile(filename):
         contents.decode("utf-8", "replace") 
         parser = MyHTMLParser()
         parser.feed(contents)
-        if len(parser.result) == 0:
-            return "answer not found"
+        if parser.found_bold == True:
+            return parseBoldStrings(parser.result)
         else:
-            return (''.join(parser.result)).rstrip()
+            return parser.result

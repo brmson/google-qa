@@ -38,11 +38,11 @@ if __name__ == "__main__":
         questionAnswers = parsed_data[question_counter]["answers"]
         ID = parsed_data[question_counter]["qId"]
         result = q.query(questionText)
-        print(questionText+"\t"+result)
-        if (result == "answer not found"):
-            result = None
-        else:
+        if len(result) > 0:
             answered = answered + 1
+            print(questionText+"\t"+','.join(result))
+        else:
+            print(questionText+"\t"+"answer not found")
         d = {}
         d['qId'] = ID
         d['query'] = questionText
