@@ -1,14 +1,16 @@
 #!/usr/bin/python
 
+from __future__ import print_function
+
 import sys
 import google_query as q
 from time import sleep
-import random
 import json
+
 
 def byteify(input):
     if isinstance(input, dict):
-        return {byteify(key):byteify(value) for key,value in input.iteritems()}
+        return {byteify(key):byteify(value) for key, value in input.iteritems()}
     elif isinstance(input, list):
         return [byteify(element) for element in input]
     elif isinstance(input, unicode):
@@ -16,19 +18,21 @@ def byteify(input):
     else:
         return input
 
-def main():
+if __name__ == "__main__":
     argv = sys.argv
     input_filename = argv[1]
     output_filename = argv[2]
+
     json_data = open(input_filename)
-    output = open(output_filename,"w")
+    output = open(output_filename, "w")
     parsed_data = byteify(json.load(json_data))
     number_of_questions = len(parsed_data)
+
     question_counter = 0
     answered = 0
     result_list = []
-    json_result_list = []
     print("question\t\tanswer")
+    print('[', file=output)
     while question_counter < number_of_questions:
         questionText = parsed_data[question_counter]["qText"]
         questionAnswers = parsed_data[question_counter]["answers"]
@@ -43,14 +47,13 @@ def main():
         d['qId'] = ID
         d['query'] = questionText
         d['answer'] = result
-        result_list.append(d)
-        sleep(1)
+        if question_counter < number_of_questions-1:
+            print('  %s,' % (json.dumps(d, sort_keys=True),), file=output)
+        else:
+            print('  %s' % (json.dumps(d, sort_keys=True),), file=output)
+        sleep(2)
         question_counter = question_counter+1
-    print "answered " + str(answered) + "questions from" + str(number_of_questions)
-    json.dump(result_list, output)
+    print ("answered " + str(answered) + "questions from" + str(number_of_questions))
+    print(']', file=output)
     output.close()
     json_data.close()
-    return
-
-if __name__ == "__main__":
-    main()
