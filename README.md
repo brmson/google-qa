@@ -10,3 +10,9 @@ Then start it with:
 	
 	./google-eval.py input.json output.json
 
+google_query can by used by itself, by calling query or queryAndDump (which also saves the website to a file) with the question as parameter.
+
+	import google_query as q
+	q.query("Who directed fight club?")
+
+It is also extensible, you can add html attributes to increase the amount of found answers.

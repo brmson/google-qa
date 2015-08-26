@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import sys
-import subprocess
+import google_query as q
 from time import sleep
 import random
 import json
@@ -32,9 +32,9 @@ def main():
         questionText = parsed_data[question_counter]["qText"]
         questionAnswers = parsed_data[question_counter]["answers"]
         ID = parsed_data[question_counter]["qId"]
-        result = subprocess.check_output(["./google-query.sh", questionText]).rstrip()
+        result = q.query(questionText)
         print(questionText+"\t"+result)
-        if (result == "no answer found"):
+        if (result == "answer not found"):
             result = None
         d = {}
         d['qId'] = ID
@@ -44,8 +44,7 @@ def main():
         sleep(1)
         question_counter = question_counter+1
 
-    json_result_list = json.dumps(result_list)
-    output.write(json_result_list)
+    json.dump(result_list, output)
     output.close()
     json_data.close()
     return
