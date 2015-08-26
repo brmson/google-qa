@@ -25,6 +25,7 @@ def main():
     parsed_data = byteify(json.load(json_data))
     number_of_questions = len(parsed_data)
     question_counter = 0
+    answered = 0
     result_list = []
     json_result_list = []
     print("question\t\tanswer")
@@ -36,6 +37,8 @@ def main():
         print(questionText+"\t"+result)
         if (result == "answer not found"):
             result = None
+        else:
+            answered = answered + 1
         d = {}
         d['qId'] = ID
         d['query'] = questionText
@@ -43,7 +46,7 @@ def main():
         result_list.append(d)
         sleep(1)
         question_counter = question_counter+1
-
+    print "answered " + str(answered) + "questions from" + str(number_of_questions)
     json.dump(result_list, output)
     output.close()
     json_data.close()
