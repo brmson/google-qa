@@ -6,7 +6,7 @@ We tested this by matching our results against the gold standard answers in the 
 one match would count as a correct answer. The accuracy is 60.0858369099%.
 
 Out of the 93 incorrectly answered questions, 8 had the wrong date format,
-case or missed a substring. For example, "When was Fight Club produced" returned "1999",while the GS expected "1999-09-10", 
+case or missed a substring. For example, "When was Fight Club produced" returned "1999", while the GS expected "1999-09-10", 
 "Piano" didn't match against "piano" and "How the Grinch Stole Christmas!" didn't match "Dr. Seuss' How the Grinch Stole Christmas"
 
 After further analysis, we deemed 10 questions in our gold standard to be factually incorrect. Google answered correctly in those cases.
