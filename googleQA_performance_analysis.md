@@ -53,7 +53,7 @@ examples:
 	gold standard: Children’s Hospital Los Angeles
 	actual answer: <list of movies>
 	
-	There were other ambiguous questions, but we ignored those as noise.
-	The mechanical comparison was done using gold_standard_comparison.py
+There were other ambiguous questions, but we ignored those as noise.
+The mechanical comparison was done using gold_standard_comparison.py
 
-		python gold_standard_comparison.py moviesC-test.json moviesC-test-google.json
+	python gold_standard_comparison.py moviesC-test.json moviesC-test-google.json
