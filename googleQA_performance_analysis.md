@@ -1,4 +1,5 @@
 GoogleQA performance analysis
+=============================
 
 Using our moviesC-test dataset, Google correctly answered 140 out of 233 questions.
 We tested this by matching our results against the gold standard answers in the dataset itself. Whenever we encountered a list of answers 
@@ -11,7 +12,7 @@ case or missed a substring. For example, "When was Fight Club produced" returned
 
 After further analysis, we deemed 10 questions in our gold standard to be factually incorrect. Google answered correctly in those cases.
 
-examples:
+List:
 	
 	who plays ken barlow in coronation street?
 	gold standard: Tony Warren
