@@ -46,6 +46,13 @@ class MyHTMLParser(HTMLParser):
             self.result.append(data)
         if self.nested_recording == True:
             self.result.append(data)
+    def handle_entityref(self, ref):
+        if self.recording == True or self.nested_recording == True:
+            if ref == 'amp':
+                self.merge = True
+                self.handle_data('&')
+
+
 
 #we append 'b' to the list whenever we find a html bold tag, so now we parse it
 def parseBoldStrings(result):
