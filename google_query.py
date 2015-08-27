@@ -52,8 +52,6 @@ class MyHTMLParser(HTMLParser):
                 self.merge = True
                 self.handle_data('&')
 
-
-
 #we append 'b' to the list whenever we find a html bold tag, so now we parse it
 def parseBoldStrings(result):
     result_list = []
