@@ -21,8 +21,8 @@ favor in the total accuracy, as other systems automatically evaluated using this
 dataset will have the same trouble.  Still, a detailed analysis of dataset
 mistakes follows:
 
-In total, 40 answers seem to be true Google mistakes to us,
-while 18 were dataset of matching problems.
+In total, **40 questions** seem to be true Google mistakes to us,
+while **18 questions** were dataset or matching problems.
 
 8 questions had the answer in a wrong date format,
 case or missed a substring. For example, "When was Fight Club produced" returned "1999", while the GS expected "1999-09-10", 
