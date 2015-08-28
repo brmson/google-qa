@@ -1,12 +1,30 @@
-GoogleQA performance analysis
+GoogleQA Performance Analysis
 =============================
 
-Using our moviesC-test dataset, Google correctly answered 140 out of 233 questions.
-We tested this by matching our results against the gold standard answers in the dataset itself. Whenever we encountered a list of answers 
-(e.g. a list a movies),
-one match would count as a correct answer. The accuracy is 60.0858369099%.
+Using our **moviesC-test** dataset, Google was asked 233 questions, answering
+198 of them, but we deem just 140 questions as answered correctly.
+We tested this by matching our results against the gold standard answers in the dataset.
+Whenever we encountered a list of answers (e.g. a list a movies),
+*any one match* would count the question as answered correctly.
+The accuracy is thus **60.0858369099%**.
 
-Out of the 93 incorrectly answered questions, 8 had the wrong date format,
+The mechanical comparison was done using gold_standard_comparison.py:
+
+	python gold_standard_comparison.py moviesC-test.json moviesC-test-google.json
+
+Dataset Noise
+-------------
+
+Some of the questions judged as answered wrongly are not the fault of Google
+but of our dataset or the matching procedure.  We do not count these in Google's
+favor in the total accuracy, as other systems automatically evaluated using this
+dataset will have the same trouble.  Still, a detailed analysis of dataset
+mistakes follows:
+
+In total, 40 answers seem to be true Google mistakes to us,
+while 18 were dataset of matching problems.
+
+8 questions had the answer in a wrong date format,
 case or missed a substring. For example, "When was Fight Club produced" returned "1999", while the GS expected "1999-09-10", 
 "Piano" didn't match against "piano" and "How the Grinch Stole Christmas!" didn't match "Dr. Seuss' How the Grinch Stole Christmas"
 
@@ -55,6 +73,3 @@ List:
 	actual answer: <list of movies>
 	
 There were other ambiguous questions, but we ignored those as noise.
-The mechanical comparison was done using gold_standard_comparison.py
-
-	python gold_standard_comparison.py moviesC-test.json moviesC-test-google.json

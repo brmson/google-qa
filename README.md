@@ -17,4 +17,6 @@ google_query can by used by itself, by calling query or queryAndDump (which also
 
 It is also extensible, you can add html attributes to the lists and increase the amount of found answers.
 
-The moviesC-test-google.json dataset was created by using moviesC-test from brmson/dataset-factoid-movies/moviesC. Google answered 198 questions out of 233.
+The moviesC-test-google.json dataset was created by using moviesC-test
+from brmson/dataset-factoid-movies/moviesC on 2015-08-27.
+See PERFORMANCE.md for the numbers as well as detailed evaluation.
