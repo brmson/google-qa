@@ -1,19 +1,32 @@
 GoogleQA Performance Analysis
 =============================
 
-Using our **moviesC-test** dataset, Google was asked 233 questions, answering
-198 of them, but we deem just 140 questions as answered correctly.
-We tested this by matching our results against the gold standard answers in the dataset.
-Whenever we encountered a list of answers (e.g. a list a movies),
-*any one match* would count the question as answered correctly.
-The accuracy is thus **60.0858369099%**.
-
-The mechanical comparison was done using gold_standard_comparison.py:
+The mechanical comparison is done using gold_standard_comparison.py:
 
 	python gold_standard_comparison.py moviesC-test.json moviesC-test-google.json
 
-Dataset Noise
--------------
+We tested by matching our results against the gold standard answers in the dataset.
+Whenever we encountered a list of answers (e.g. a list a movies),
+*any one match* would count the question as answered correctly.
+
+moviesE evaluation
+------------------
+
+In the moviesE-test dataset, 431 questions were asked; 352 were answered (85%),
+but our gold standard deemed 173 incorrect (mostly dataset / matching noise,
+as with moviesC).
+
+The accuracy is thus **59.8607888631%**.
+
+moviesC evaluation
+------------------
+
+Using our **moviesC-test** dataset, Google was asked 233 questions, answering
+198 of them, but we deem just 140 questions as answered correctly.
+The accuracy is thus **60.0858369099%**.
+
+Dataset Noise (moviesC)
+-----------------------
 
 Some of the questions judged as answered wrongly are not the fault of Google
 but of our dataset or the matching procedure.  We do not count these in Google's
