@@ -1,8 +1,15 @@
+#!/usr/bin/python -u
+
 import json
+import os
+import re
 import sys
 
 def intersect(a, b):
      return list(set(a) & set(b))
+
+def date_reformat(date):
+     return os.popen('date +%F -d "'+date.encode('utf8')+'" 2>/dev/null').read().rstrip()
 
 argv = sys.argv
 gs_filename = argv[1]
@@ -19,7 +26,9 @@ for x in range(0, number_of_questions):
         i = 1
     elif len(answers_json[x]['answer']) == 1:
         for gs_answer in gs_json[x]['answers']:
-            if answers_json[x]['answer'][0] in gs_answer:
+            ans = answers_json[x]['answer'][0]
+            if re.search(gs_answer, ans, re.IGNORECASE) or \
+               re.search(gs_answer, date_reformat(ans), re.IGNORECASE):
                 correctly_answered = correctly_answered + 1
                 break
         else:
